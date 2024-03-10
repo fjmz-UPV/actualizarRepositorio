@@ -1,7 +1,9 @@
+REM Version 2.0
 set instante=%DATE%_%TIME::=_%
 set mensaje="Guardado en %instante%"
-git checkout -b %instante%
 git add -A
 git commit -m %mensaje%
-git checkout master
-git pull
+git tag "Local_%instante%"
+git fetch origin master
+git tag "Remoto_%instante%" origin/master
+git merge -Xours origin/master -m "Mezclado y actualizado"
